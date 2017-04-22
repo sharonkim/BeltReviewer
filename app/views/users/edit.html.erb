@@ -1,0 +1,23 @@
+<p><a href="/events">Events Dashboard</a>  &emsp14; <a href="/logout">Logout</a></p>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+
+<h3>Edit Your Profile</h3>
+<form action="/users/<%= user.id %>" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<input type="hidden" name="authenticity_token" value="<%=  form_authenticity_token%>">
+	First Name: <input type="text" name="user[first_name]" value="<%= @user.first_name %>">
+	Last Name: <input type="text" name="user[last_name]" value="<%=  @user.last_name %>">
+	Email: <input type="text" name="user[email]" value="<%= @user.email %>">
+	City: <input type="text" name="user[city]" value="<%= @user.city %>">
+	<select name="user[state]">
+		<% CS.states(:us).each do |state| %>
+			<option value="<%= state %>"><%= @user.state %></option>
+		<% end %>
+	</select>
+	<input type="submit" value="Update Records">
+</form>

@@ -1,0 +1,32 @@
+<% if flash[:errors] %>
+	<% flash[:errors].each do | e | %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+
+<h3>Welcome!</h3>
+
+<h3>Register</h3>
+<form action="/users" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	First Name: <input type="text" name="user[first_name]" placeholder="John">
+	Last Name: <input type="text" name="user[last_name]" placeholder="Smith">
+	Email: <input type="text" name="user[email]" placeholder="jsmith@email.com">
+	City: <input type="text" name="user[city]" placeholder="City Name">
+	<select name="user[state]">
+		<% CS.states(:us).each |s| %>
+			<option value="<%= s %>">AK</option>
+		<% end %>
+	</select>
+	Password: <input type="password" name="user[password]" placeholder="Password must be at least 8 characters in length">
+	Confirm Password: <input type="password" name="user[password_confirmation]" value="Please re-enter password">
+	<input type="submit" value="Register">
+</form>
+
+<h3>Login</h3>
+<form action="/users/login" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	Email: <input type="text" name="email" placeholder="jsmith@email.com">
+	Password: <input type="password" name="password" placeholder="Enter password">
+	<input type="submit" value="Login">
+</form>

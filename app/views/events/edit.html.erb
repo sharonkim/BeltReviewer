@@ -1,0 +1,17 @@
+<p><a href="/events">Home</a> &emsp14; <a href="/logout">Logout</a></p>
+
+<h3>Edit Event</h3>
+<form action="/events/<%= @event.id %>" method="post">
+	<input type="hidden" name="_method" value="patch">
+	<input type="hidden" name="authenticity_token" value="<% form_authenticity_token %>">
+	Name: <input type="text" name="event[name]" value="<%= @event.name %>">
+	Date: <input type="date" name="event[date]" value="<%= @event.date %>">
+	Location: <input type="text" name="event[location]" value="<%= @event.location %>">
+	<select name="event[state]">
+		<% CS.states(:us).each do |s| %>
+			<option value="<%= @event.state %>"></option>
+	</select>
+	Host: <input type="text" name="event[host]" value="<%= @event.host %>">
+	<input type="hidden" name="event[host_id]" value="session[:id]">
+	<input type="submit" value="Update Event">
+</form>

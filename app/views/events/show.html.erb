@@ -1,0 +1,41 @@
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+
+<a href="/events">Events Dashboard</a> &emsp14; <a href="/logout">Logout</a>
+
+<h2><%= @event.name %></h2>
+<h4>Host:</h4> &emsp14; <p><%= @event.user.first_name %> <%= @event.user.last_name %></p>
+<h4>Date:</h4> &emsp14; <p><%= @event.date %></p>
+<h4>Location:</h4> &ensp; <p><%= @event.city %>, <%= @event.state %></p>
+<h4>People who are joining the event:</h4> &emsp14; <p><%= @event.user.count %></p>
+
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Location</th>
+		<th>State</th>
+	</thead>
+	<tbody>
+
+		<% @event.user.each do |user| %>
+			<tr>
+				<td><%= user.first_name %> <%= user.last_name %></td>
+				<td><%= user.city %></td>
+				<td><%= user.state %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<h4>Discussion about this event:</h4>
+	<% @comment.each do %>
+		<p><%= @comment.user.first_name %> says: <%= @comment.content %></p>
+		<p>---------------------------</p>
+	<% end %>
+
+	<h4>Add Comment:</h4>
+	<textarea rows="8" cols="80"></textarea>
+	<input type="submit" value="Submit Comments">

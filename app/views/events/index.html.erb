@@ -1,0 +1,109 @@
+<h2>Welcome, <%= @user.first_name %></h2>
+
+<% if flash[:errors] %>
+	<% flash[:errors].each do |e| %>
+		<p><%= e %></p>
+	<% end %>
+<% end %>
+
+<h3>Here are some of the events in your state:</h3>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Host</th>
+		<th>Action/Status</th>
+	</thead>
+	<tbody>
+
+		<% if @events %>
+			<% @events.each do |event| %>
+				<% if event.state == @user.state %>
+
+					<tr>
+						<td><a href="/events/<%= event.id %>"><%= event.name %></a></td>
+						<td><%= event.date %></td>
+						<td><%= event.city %></td>
+						<td><%= event.user.first_name %> <%= event.user.last_name %></td>
+
+							<% if @user.id == event.user_id %>
+								<input type="hidden" name="_method" value="patch">
+								<input type="hidden" name="_method" value="delete">
+								<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+								<td>
+									<a href="/events/<%= event.id %>/edit">Edit</a> &emsp14; <a href="/events<%= event.id %>"data-method="delete">Delete</a>
+
+							<% else %>
+								<td>
+									<form action="/events/<%= event.id %>/join" method="post">
+										<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+										<input type="hidden" name="event[user_id]" value="<%= user.id %>">
+										<a href="/events/<%= event.id %>/join %>">Join</a>
+									</form>
+								</td>
+							<% end %>
+					</tr>
+				<% end %>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
+
+<h3>Here are some of the events in other states:</h3>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>State</th>
+		<th>Host</th>
+		<th>Action/Status</th>
+	</thead>
+	<tbody>
+		<% if events %>
+			<% @events.each do |event| %>
+				<% if event.state != @user.state %>
+					<tr>
+						<td>
+							<a href="/events/<%= event.id %>"><%= event.name %></a>
+						</td>
+						<td><%= event.date %></td>
+						<td><%= event.city %></td>
+						<td><%= event.state %></td>
+						<td><%= event.user.first_name %></td>
+
+						<% if @user.id == event.user_id %>
+							<td>
+								<a href="/events/<%= event.id %>/edit">Edit</a> &emsp14; <a href="/events/<%= event.id %>" data-method="delete">Delete</a>
+							</td>
+							<td>
+								<form action="/events/<%= event.id %>/join" method="post">
+									<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+									<input type="hidden" name="event[user_id]" value="<%= user.id %>">
+									<a href="/events/<%= event.id %>/join %>">Join</a>
+								</form>
+							</td>
+						<% end %>
+					</tr>
+				<% end %>
+			<% end %>
+		<% end %>
+	</tbody>
+</table>
+
+<h3>Add Event</h3>
+<form action="/events" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	Name: <input type="text" name="event[name]" placeholder="Event Name">
+	Date: <input type="date" name="event[date]">
+	Location: <input type="text" name="event[city]" placeholder="Location of event">
+	<select name="user[state]">
+		<% CS.states(:us).each |state| %>
+			<option value="<%= state %>">AK</option>
+		<% end %>
+	</select>
+	<input type="submit" value="Add Event">
+</form>
+
+<a href="/users/<%= @user.id %>/edit">Edit Profile</a> &emsp14; <a href="/logout">Logout</a>
