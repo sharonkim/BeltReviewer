@@ -46,5 +46,6 @@ class UsersController < ApplicationController
 
             if user_id != (session[:user_id])
                 redirect_to users_show_path(session[:user_id])
+            end
         end
 end
