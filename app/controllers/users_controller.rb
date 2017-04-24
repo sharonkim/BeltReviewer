@@ -15,6 +15,7 @@ class UsersController < ApplicationController
             flash[:errors] = user.errors.full_messages
             redirect_to :root
         end
+    end
 
     def edit
     end
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
             flash[:errors] = ["Invalid email or password. Please try again."]
             redirect_to :root
         end
+    end
 
     def destroy
     end
