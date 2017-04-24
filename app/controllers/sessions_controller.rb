@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :require_login, only: [:new, :create]
+    before_action :require_login, only: [:new, :create]
 
     def new
     end
@@ -20,8 +20,4 @@ class SessionsController < ApplicationController
         reset_session
         redirect_to "/sessions/new"
     end
-    # 
-    # private
-    #     def require_login
-
 end
