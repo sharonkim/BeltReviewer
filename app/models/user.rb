@@ -2,7 +2,7 @@ class User < ApplicationRecord
 	has_secure_password
 
 	has_many :comments, :events, :user_events
-	has_many :events, :through: :user_events
+	has_many :events, through: :user_events
 
 	validates :first_name, :last_name, :email, :city, :state, presence: true
 	validates :email, uniqueness: true { case_sensitive: false }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i }
