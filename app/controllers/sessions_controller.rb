@@ -9,15 +9,15 @@ class SessionsController < ApplicationController
 
         if user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            redirect_to 'users/#{@user.id}', notice "You have successfully created a user account"
-
+            redirect_to "/users/#{@user.id}", notice: "You have successfully created a user account"
         else
             flash[:errors] = ["Invalid Email or Password. Please try again."]
-            redirect_to '/sessions/new'
+            redirect_to "/sessions/new"
+        end
     end
 
     def destroy
         reset_session
-        redirect_to '/sessions/new'
+        redirect_to "/sessions/new"
     end
 end
