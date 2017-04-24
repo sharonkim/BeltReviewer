@@ -2,7 +2,10 @@ class UsersController < ApplicationController
     before_action :require_login, except: [:new, :create]
     before_action :require_login, except: [:new, :create]
 
-   def create
+    def new
+    end
+
+    def create
         user = User.new(user_params)
 
         if user.save

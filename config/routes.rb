@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-    root 'users#new'
+    root 'users#create'
     get 'users/:id' => 'users#show', as: 'users_show'
     get 'users/:id/edit' => 'users#edit', as: 'users_edit'
-    post 'users' => 'users#create'
+    # post 'users' => 'users#create'
     post 'users/login' => 'users#login'
     patch 'users/:id' => 'users#update'
     delete 'users/:id' => 'users#logout'
