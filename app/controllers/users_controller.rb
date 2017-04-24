@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     before_action :require_login, except: [:new, :create]
-    before_action :check_user, except: [:new, :create]
+    before_action :require_login, except: [:new, :create]
 
     def new
     end
@@ -41,7 +41,7 @@ class UsersController < ApplicationController
             params.require(:user).permit(:first_name, :last_name, :email, :city, :state, :password, :password_confirmation)
         end
 
-        def check_user
+        def require_login
             user_id = params[:id].to_i
 
             if user_id != (session[:user_id])

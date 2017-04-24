@@ -20,4 +20,8 @@ class SessionsController < ApplicationController
         reset_session
         redirect_to "/sessions/new"
     end
+    # 
+    # private
+    #     def require_login
+
 end
