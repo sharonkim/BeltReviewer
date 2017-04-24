@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
     root 'sessions#new'
-    get 'sessions/new'
     post 'sessions' => 'sessions#create'
     delete 'sessions/:id' => 'sessions#destroy'
 
