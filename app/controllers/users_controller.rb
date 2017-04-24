@@ -46,5 +46,6 @@ class UsersController < ApplicationController
 
             if user_id != (session[:user_id])
                 redirect_to "/users/#{@users.id}".session[:user_id]
+            end
         end
 end
