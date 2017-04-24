@@ -9,12 +9,11 @@ class User < ApplicationRecord
 	validates :email, uniqueness: { case_sensitive: false }, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i }
 	validates :state, length: { is:2 }
 	validates :password, length: { minimum:8 }, on: :create
-	validates :password_confirmation
 
 	before_save :downcase_email
 
 	private
 		def downcase_email
-			self.email.downcase!
+			email.downcase!
 	end
 end
