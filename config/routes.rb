@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
     root 'users#new'
-    get 'users/:id' => 'users#show'
-    get 'users/:id/edit' => 'users#edit'
+    get 'users/:id' => 'users#show', as: 'users_show'
+    get 'users/:id/edit' => 'users#edit', as: 'users_edit'
     post 'users' => 'users#create'
     post 'users/login' => 'users#login'
     patch 'users/:id' => 'users#update'
