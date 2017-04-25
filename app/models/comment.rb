@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :user
-  belongs_to :events
+  belongs_to :event
 
-  validates :content, presence: true, length: { minimum:2 }
+  validates :content, presence: true
 end

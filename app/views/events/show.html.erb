@@ -9,8 +9,8 @@
 <h2><%= @event.name %></h2>
 <h4>Host:</h4> &emsp14; <p><%= @event.user.first_name %> <%= @event.user.last_name %></p>
 <h4>Date:</h4> &emsp14; <p><%= @event.date %></p>
-<h4>Location:</h4> &ensp; <p><%= @event.city %>, <%= @event.state %></p>
-<h4>People who are joining the event:</h4> &emsp14; <p><%= @event.user.count %></p>
+<h4>Location:</h4> &ensp; <p><%= @event.location %>, <%= @event.state %></p>
+<h4>People who are joining the event:</h4> &emsp14; <p><%= @event.participant.count - 1 %></p>
 
 <table>
 	<thead>
@@ -20,22 +20,29 @@
 	</thead>
 	<tbody>
 
-		<% @event.user.each do |user| %>
-			<tr>
-				<td><%= user.first_name %> <%= user.last_name %></td>
-				<td><%= user.city %></td>
-				<td><%= user.state %></td>
-			</tr>
+		<% @event.participant.each do |user| %>
+			<% if @event.user != user %>
+				<tr>
+					<td><%= user.first_name %> <%= user.last_name %></td>
+					<td><%= user.location %></td>
+					<td><%= user.state %></td>
+				</tr>
+			<% end %>
 		<% end %>
 	</tbody>
 </table>
 
 <h4>Discussion about this event:</h4>
-	<% @comment.each do %>
-		<p><%= @comment.user.first_name %> says: <%= @comment.content %></p>
-		<p>---------------------------</p>
+	<% if @comments %>
+		<% @comments.each do |comment| %>
+			<p><%= @comment.user.first_name %> says: <%= @comment.content %></p>
+			<p>---------------------------</p>
+		<% end %>
 	<% end %>
 
-	<h4>Add Comment:</h4>
-	<textarea rows="8" cols="80"></textarea>
-	<input type="submit" value="Submit Comments">
+	<form action="/events/<%= event.id %>/comment/create" method="post">
+		<input type="hidden" name="authenticity_token" value="<% form_authenticity_token %>">
+		<h4>Add Comment:</h4>
+		<textarea name="content" rows="8" cols="80"></textarea>
+		<input type="submit" value="Submit Comments">
+	</form>

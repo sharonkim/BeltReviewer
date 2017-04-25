@@ -1,38 +1,40 @@
 class UsersController < ApplicationController
     before_action :require_login, except: [:new, :create]
-    before_action :require_login, except: [:new, :create]
-
-    def new
-    end
 
     def create
-        user = User.new(user_params)
+        user = User.create(user_params)
 
-        if user.save
+        if @user.valid?
             session[:user_id] = user.id
-            redirect_to sessions_new_path
+            flash[:errors] = ["Congratulations, you have successfully created a user account!"]
+            redirect_to "/events"
 
         else
             flash[:errors] = user.errors.full_messages
-            redirect_to :root
+            redirect_to "/"
         end
     end
 
     def edit
+        render "/users/edit.html.erb"
     end
 
     def update
-    end
+        user = current_user
+        user.first_name = params[:first_name]
+        user.last_name = params[:last_name]
+        user.email = params[:email]
+        user.location = params[:location]
+        user.state = params[:state]
+        user.save
 
-    def login
-        user = User.find_by_email(params[:email])
-        if user && user.authenticate(params[:password])
-            session[:user_id] = user.id
-            redirect_to sessions_new_path
+        if user.valid?
+            flash[:errors] = ["Information has been successfully updated"]
+            redirect_to "/events"
 
         else
-            flash[:errors] = ["Invalid email or password. Please try again."]
-            redirect_to :root
+            flash[:errors] = user.errors.full_messages
+            redirect_to "/users/#{user.id}/edit"
         end
     end
 

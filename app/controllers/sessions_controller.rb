@@ -2,22 +2,28 @@ class SessionsController < ApplicationController
     before_action :require_login, except: [:new, :create]
 
     def new
+        reset_session
+        redirect_to "/sessions/new.html.erb"
     end
 
     def create
-        @user = User.find_by_email(params[:email])
+        if user = User.find_by_email(email: params[:email])
+            if user.authenticate(params[:password])
+                session[:user_id] = user.id
+                flash[:notice] = ["You have successfully created a user account"]
+                redirect_to "/events"
 
-        if user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
-            redirect_to "/users/#{@user.id}", notice: "You have successfully created a user account"
-        else
-            flash[:errors] = ["Invalid Email or Password. Please try again."]
-            redirect_to "/sessions/new"
+            else
+                flash[:errors] = ["Invalid Email or Password. Please try again."]
+                redirect_to "/"
+            end
         end
     end
 
     def destroy
+       session[:user_id] = nil
+        flash[:notice] = "You have been succefully logged out."
         reset_session
-        redirect_to "/sessions/new"
+        redirect_to "/"
     end
 end

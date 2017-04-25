@@ -1,28 +1,33 @@
 class EventsController < ApplicationController
-    before_action :require_login
-
     def index
-        @event = Event.all
+        @in_state_events = Event.where(state: current_user.state)
+        @other_events = Event.where.not(state: current_user.state)
+        render "/events/index.html.erb"
     end
 
     def create
-        event = Event.new(event_params)
+        event = Event.create(user_params)
 
-        if event.save
-            redirect_to '/events'
+        if event.valid?
+            flash[:errors] = ["You have successfully created an event!"]
+            Participant.create(user: current_user, event: event)
+            redirect_to "/events"
 
         else
-        end
+           flash[:errors] = event.errors.full_messages
+           redirect_to "/"
+       end
+    end
+
+    def view
+        @events = Event.find(params[:id])
+        @comments = Comment.where(event: @event)
+        render "/events/view.html.erb"
     end
 
     def destroy
-        if session[:user_id] == Event.find(params[:id]).user_id
-        end
-        redirect_to users_show_path :id => current_user.id
+        event = Event.find(params[:id])
+        event.destroy
+        redirect_to "/events"
     end
-
-    private
-        def event_params
-            params.require(:event),require(:name, :date, :city, :state)
-        end
 end
