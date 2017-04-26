@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-    root "/" => "sessions#new"
+    root "sessions#new"
 
     post "/sessions/create" => "sessions#create"
     delete "/sessions/:id" => "sessions#destroy"

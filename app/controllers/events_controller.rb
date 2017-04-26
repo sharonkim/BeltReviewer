@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
         else
            flash[:errors] = event.errors.full_messages
-           redirect_to "/"
+           redirect_to root_path
        end
     end
 

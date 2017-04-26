@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
 
             else
                 flash[:errors] = ["Invalid Email or Password. Please try again."]
-                redirect_to "/"
+                redirect_to root_path
             end
         end
     end
@@ -24,6 +24,6 @@ class SessionsController < ApplicationController
        session[:user_id] = nil
         flash[:notice] = "You have been succefully logged out."
         reset_session
-        redirect_to "/"
+        redirect_to root_path
     end
 end
