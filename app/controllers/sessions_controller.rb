@@ -1,8 +1,7 @@
 class SessionsController < ApplicationController
-    # before_action :require_login, except: [:create]
+    before_action :require_login, except: [:new, :create]
 
-    def index
-        render :root
+    def new
     end
 
     def create
