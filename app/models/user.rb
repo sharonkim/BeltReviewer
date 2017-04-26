@@ -4,12 +4,12 @@ class User < ApplicationRecord
 	has_many :comments
 	has_many :participants
 	has_many :events
-	has_many :events, through: :participants, source: :event
+	has_many :functions, through: :participants, source: :event
 
-	email_regex = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
+	emrgx = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
 
 	validates :first_name, :last_name, :email, :city, :state, :password, presence: true
-	validates :email, uniqueness: true, format: { with: email_regex }
+	validates :email, uniqueness: true, format: { with: emrgx }
 	validates :state, length: { is: 2 }
 	validates :password, length: { minimum: 8 }, on: :create
 

@@ -10,14 +10,14 @@
 <form action="/users/<%= current_user.id %>" method="post">
 	<input type="hidden" name="_method" value="patch">
 	<input type="hidden" name="authenticity_token" value="<%=  form_authenticity_token%>">
-	<p>First Name: <input type="text" name="user[first_name]" value="<%= @user.first_name %>"></p>
-	<p>Last Name: <input type="text" name="user[last_name]" value="<%=  @user.last_name %>"></p>
-	<p>Email: <input type="text" name="user[email]" value="<%= @user.email %>"></p>
-	<p>City: <input type="text" name="user[city]" value="<%= @user.city %>"></p>
-	<select name="user[state]">
+	<p>First Name: <input type="text" name="first_name" value="<%= user.first_name %>"></p>
+	<p>Last Name: <input type="text" name="last_name" value="<%=  user.last_name %>"></p>
+	<p>Email: <input type="text" name="email" value="<%= user.email %>"></p>
+	<p>City: <input type="text" name="city" value="<%= user.city %>">
+	<select name="state">
 		<% CS.states(:us).each do |state| %>
-			<option value="<%= state %>"><%= @user.state %></option>
+			<option value="<%= state %>"><%= user.state %></option>
 		<% end %>
-	</select>
+	</select></p>
 	<input type="submit" value="Update Records">
 </form>

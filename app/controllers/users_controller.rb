@@ -4,41 +4,34 @@ class UsersController < ApplicationController
     def create
         user = User.create(user_params)
 
-        if @user.valid?
+        if user.save
             session[:user_id] = user.id
-            flash[:errors] = ["Congratulations, you have successfully created a user account!"]
             redirect_to "/events"
 
         else
             flash[:errors] = user.errors.full_messages
-            redirect_to root_path
+            redirect_to :back
         end
     end
 
     def edit
-        render "/users/edit.html.erb"
+        user = User.find(params[:id])
     end
 
     def update
-        user = current_user
-        user.first_name = params[:first_name]
-        user.last_name = params[:last_name]
-        user.email = params[:email]
-        user.location = params[:location]
-        user.state = params[:state]
-        user.save
+        user = User.find(params[:id])
 
-        if user.valid?
-            flash[:errors] = ["Information has been successfully updated"]
+        if user.update(params[:id])
             redirect_to "/events"
-
         else
             flash[:errors] = user.errors.full_messages
-            redirect_to "/users/#{user.id}/edit"
+            redirect_to :back
         end
     end
 
     def destroy
+        user = User.find(params[:id])
+        redirect_to :root
     end
 
     private
@@ -50,7 +43,7 @@ class UsersController < ApplicationController
             user_id = params[:id].to_i
 
             if user_id != (session[:user_id])
-                redirect_to users_show_path(session[:user_id])
+                redirect_to "/events"
             end
         end
 end

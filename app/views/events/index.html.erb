@@ -16,7 +16,7 @@
 		<th>Action/Status</th>
 	</thead>
 	<tbody>
-		<% @in_state_events.each do |event| %>
+		<% @local_events.each do |event| %>
 			<tr>
 				<td><a href="/events/<%= event.id %>"><%= event.name %></a></td>
 				<td><%= event.date %></td>
@@ -105,12 +105,12 @@
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 	<p>Name: <input type="text" name="name" placeholder="Event Name" required></p>
 	<p>Date: <input type="date" name="date" required></p>
-	<p>Location: <input type="text" name="city" placeholder="Location of event" required></p>
+	<p>Location: <input type="text" name="city" placeholder="Location of event" required>
 	<select name="state">
 		<% CS.states(:us).each |state| %>
 			<option value="<%= state %>">AK</option>
 		<% end %>
-	</select>
+	</select></p>
 	<input type="submit" value="Add Event">
 </form>
 

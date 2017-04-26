@@ -10,15 +10,15 @@
 	<h3>Register</h3>
 	<form action="/users/create" method="post">
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-		<p>First Name: <input type="text" name="first_name" placeholder="John"></p>
-		<p>Last Name: <input type="text" name="last_name" placeholder="Smith"></p>
+		<p>First Name: <input type="text" name="first_name" placeholder="First Name"></p>
+		<p>Last Name: <input type="text" name="last_name" placeholder="Last Name"></p>
 		<p>Email: <input type="text" name="email" placeholder="name@email.com"></p>
-		<p>City: <input type="text" name="city" placeholder="City Name"></p>
+		<p>City: <input type="text" name="city" placeholder="City Name">
 		<select name="state">
 			<% CS.states(:us).each |s| %>
 			<option value="<%= s %>">AK</option>
 			<% end %>
-		</select>
+		</select></p>
 		<p>Password: <input type="password" name="password" placeholder="Password must be at least 8 characters in length"></p>
 		<p>Confirm Password: <input type="password" name="password_confirmation" value="Re-enter password"></p>
 		<input type="submit" value="Register">

@@ -7,11 +7,11 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
-      unless session[:user_id]
-          redirect_to sessions_new_path
+      if session[:user_id] == nil
+          flash[:errors] = ["Please log in"]
+          redirect_to :root
       end
   end
-
   helper_method :current_user
 
 end
