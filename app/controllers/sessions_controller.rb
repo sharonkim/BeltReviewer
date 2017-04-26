@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
         user = User.find_by_email(params[:user][:email])
 
         if user && if user.authenticate(params[:user][:password])
-                session[:user_id] = user.id
-                redirect_to "/events"
+            session[:user_id] = user.id
+            redirect_to "/events"
         else
             flash[:errors] = ["Invalid Email or Password. Please try again."]
             redirect_to :back
