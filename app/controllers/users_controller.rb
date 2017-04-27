@@ -6,12 +6,10 @@ class UsersController < ApplicationController
 
         if user.save
             session[:user_id] = user.id
-            redirect_to "/events"
-
         else
             flash[:errors] = user.errors.full_messages
-            redirect_to :back
         end
+        redirect_to "/events"
     end
 
     def edit
@@ -22,16 +20,15 @@ class UsersController < ApplicationController
         user = User.find(params[:id])
 
         if user.update(params[:id])
-            redirect_to "/events"
         else
             flash[:errors] = user.errors.full_messages
-            redirect_to :back
         end
+        redirect_to "/events"
     end
 
     def destroy
         user = User.find(params[:id])
-        redirect_to :root
+        redirect_to "/events"
     end
 
     private
