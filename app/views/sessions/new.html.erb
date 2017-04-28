@@ -16,7 +16,7 @@
 		<p>City: <input type="text" name="city" placeholder="City Name">
 		<select name="state">
 			<% CS.states(:us).each do |s| %>
-			<option value="<%= s %>"><%= s[0] %></option>
+			<option value="<%= s[0] %>"><%= s[0] %></option>
 			<% end %>
 		</select></p>
 		<p>Password: <input type="password" name="password" placeholder="Password must be at least 8 characters in length"></p>
