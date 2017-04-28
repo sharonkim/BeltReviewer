@@ -15,7 +15,7 @@
 		<p>Email: <input type="text" name="email" placeholder="name@email.com"></p>
 		<p>City: <input type="text" name="city" placeholder="City Name">
 		<select name="state">
-			<% CS.states(:us).each |s| %>
+			<% CS.states(:us).each do |s| %>
 			<option value="<%= s %>">AK</option>
 			<% end %>
 		</select></p>
