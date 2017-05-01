@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419010350) do
+ActiveRecord::Schema.define(version: 20170501184404) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "user_id"
@@ -32,22 +32,24 @@ ActiveRecord::Schema.define(version: 20170419010350) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
-  create_table "user_events", force: :cascade do |t|
+  create_table "participants", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_user_events_on_event_id"
-    t.index ["user_id"], name: "index_user_events_on_user_id"
+    t.index ["event_id"], name: "index_participants_on_event_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
     t.string   "email"
     t.string   "location"
     t.string   "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.         "password_digest"
   end
 
 end

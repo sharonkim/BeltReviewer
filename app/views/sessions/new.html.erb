@@ -13,7 +13,7 @@
 		<p>First Name: <input type="text" name="user[first_name]" placeholder="First Name"></p>
 		<p>Last Name: <input type="text" name="user[last_name]" placeholder="Last Name"></p>
 		<p>Email: <input type="text" name="user[email]" placeholder="name@email.com"></p>
-		<p>City: <input type="text" name="user[city]" placeholder="City Name">
+		<p>City: <input type="text" name="user[location]" placeholder="City Name">
 		<select name="user[state]">
 			<% CS.states(:us).each do |s| %>
 			<option value="<%= s[0] %>"><%= s[0] %></option>

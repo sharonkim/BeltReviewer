@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
 	emrgx = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]+)\z/i
 
-	validates :first_name, :last_name, :email, :city, :state, :password, presence: true
+	validates :first_name, :last_name, :email, :location, :state, :password, presence: true
 	validates :email, uniqueness: true, format: { with: emrgx }
 	validates :state, length: { is: 2 }
 	validates :password, length: { minimum: 8 }, on: :create
