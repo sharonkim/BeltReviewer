@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         else
             flash[:errors] = ["Invalid Email or Password. Please try again."]
         end
-        redirect_to "/events"
+        redirect_to :root
     end
 
     def destroy

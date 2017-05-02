@@ -2,7 +2,7 @@ class EventsController < ApplicationController
     before_action :require_login
 
     def index
-        user = User.find(session[:user_id])
+        user = User.find(session[:current_user])
         User.joins(:events)
         @events = Event.all
         # @local_events = Event.where([user.state])

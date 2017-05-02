@@ -51,5 +51,5 @@ ActiveRecord::Schema.define(version: 20170501184404) do
     t.string   "last_name"
     t.         "password_digest"
   end
-  
+
 end

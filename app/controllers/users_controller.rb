@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
-    before_action :require_login, except: [:new, :create]
+    before_action :require_login, except: [:create]
+
+    def index
+    end
 
     def create
         user = User.create(user_params)
@@ -9,7 +12,7 @@ class UsersController < ApplicationController
         else
             flash[:errors] = user.errors.full_messages
         end
-        redirect_to "/events"
+        redirect_to "/users"
     end
 
     def edit
