@@ -11,7 +11,7 @@
   <body>
       <% if flash[:errors] %>
           <% flash[:errors].each do |e| %>
-              <%= e %>
+              <p class="bg-danger"><%= e %></p>
           <% end %>
       <% end %>
 
@@ -19,10 +19,12 @@
           <form action="/sessions/<%= current_user.id %>" method="post">
               <input type="hidden" name="_method" value="post">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-              <input type="submit" value="Log Out">
+              <p>
+                  <a href="/events">Event Dashboard</a> &emsp14;
+                  <a href="/users/<%= current_user.id %>">Edit My Profile</a> &emsp14;
+                  <a href="/logout">Logout</a>
+              </p>
           </form>
-          <p><a href="/events">Event Dashboard</a></p>
-          <p><a href="/users/<%= current_user.id %>">Edit My Profile</a></p>
       <% end %>
     <%= yield %>
   </body>
