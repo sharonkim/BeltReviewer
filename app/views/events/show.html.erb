@@ -1,8 +1,8 @@
 <div class="col-md-8">
 	<h2><%= @event.name %></h2>
-	<h3>Host:</h3> &emsp14; <p><%= @event.user.first_name %> <%= @event.user.last_name %></p>
-	<h3>Date:</h3> &emsp14; <p><%= @event.date %></p>
-	<h3>Location:</h3> &ensp; <p><%= @event.location %>, <%= @event.state %></p>
+	<h4>Host: &emsp14; <%= @event.user.first_name %> <%= @event.user.last_name %></h4>
+	<h4>Date: &emsp14; <%= @event.date %></h4>
+	<h4>Location: &ensp; <%= @event.location %>, <%= @event.state %></h4>
 </div>
 
 <div class="participants">

@@ -1,0 +1,50 @@
+<h3>Welcome!</h3>
+
+<div class="register">
+	<h3>Register</h3>
+	<form action="/users/create" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<p>First Name: &ensp;
+			<input type="text" name="user[first_name]" placeholder="First Name" value="<%= @user.first_name %>">
+		</p>
+		<p>Last Name: &ensp;
+			<input type="text" name="user[last_name]" placeholder="Last Name" value="<%= @user.last_name %>">
+		</p>
+		<p>Email: &ensp;
+			<input type="text" name="user[email]" placeholder="name@email.com" value="<%= @user.email %>">
+		</p>
+		<p>Location: &ensp;
+			<input type="text" name="user[location]" placeholder="Location Name" value="<%= @user.location %>">
+			<select name="user[state]">
+				<% CS.states( :us ).each do |s| %>
+				<option value="<%= s[0] %>"><%= s[0] %></option>
+				<% end %>
+			</select>
+		</p>
+		<p>
+			Password: &ensp;
+			<input type="password" name="user[password]" placeholder="Must be at least 8 characters">
+		</p>
+		<p>
+			Confirm Password: &ensp;
+			<input type="password" name="user[password_confirmation]" placeholder="Re-enter password">
+		</p>
+		<input type="submit" value="Register">
+	</form>
+</div>
+
+<div class="login">
+	<h3>Login</h3>
+	<form action="/login" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<p>
+			Email: &ensp;
+			<input type="text" name="email" placeholder="user@domain.com" value="<%= @user.email %>">
+		</p>
+		<p>
+			Password: &ensp;
+			<input type="password" name="password" placeholder="Enter password">
+		</p>
+		<input type="submit" value="Login">
+	</form>
+</div>

@@ -1,49 +1,48 @@
 class UsersController < ApplicationController
-    before_action :require_login, except: [:create]
-
     def index
+        @user = User.new
+        @user = User.new( session[ :user ] ) if flash[ :errors ] != nil && session[ :user ] != nil
     end
 
     def create
-        user = User.create(user_params)
+        @user = User.new( user_params )
 
-        if user.save
-            session[:user_id] = user.id
+        if @user.valid? && ( @user.password == @user.password_confirmation )
+            @user.save
+            session[:user] = nil
+            redirect_to root_path
         else
-            flash[:errors] = user.errors.full_messages
+            flash[ :errors ] = @user.errors.full_messages
+            session[ :user ] = @user
+                if ( @user.password != @user.password_confirmation )
+                    flash[ :errors ] = [ "Passwords do not match" ]
+                end
         end
-        redirect_to "/users"
+        redirect_to users_new_path
     end
 
-    def edit
-        user = User.find(params[:id])
+    def new
     end
 
     def update
-        user = User.find(params[:id])
+        @user = User.find( params[ :id ] )
 
-        if user.update(params[:id])
+        if @user.update( params[ :id ] )
+            redirect_to events_index_path
         else
-            flash[:errors] = user.errors.full_messages
+            flash[ :errors ] = @user.errors.full_messages
+            session[ :user ] = @user
+            redirect_to users_show_path
         end
-        redirect_to "/events"
     end
 
     def destroy
-        user = User.find(params[:id])
-        redirect_to "/events"
+        @user = User.find(params[:id])
+        redirect_to root_path
     end
 
     private
         def user_params
-            params.require(:user).permit(:first_name, :last_name, :email, :city, :state, :password, :password_confirmation)
-        end
-
-        def require_login
-            user_id = params[:id].to_i
-
-            if user_id != (session[:user_id])
-                redirect_to "/events"
-            end
+            params.require( :user ).permit( :first_name, :last_name, :email, :city, :state, :password, :password_confirmation )
         end
 end
