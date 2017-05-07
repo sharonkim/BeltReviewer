@@ -10,15 +10,15 @@ class UsersController < ApplicationController
         if @user.valid? && ( @user.password == @user.password_confirmation )
             @user.save
             session[:user] = nil
-            redirect_to root_path
+            redirect_to users_new_path
         else
             flash[ :errors ] = @user.errors.full_messages
             session[ :user ] = @user
                 if ( @user.password != @user.password_confirmation )
                     flash[ :errors ] = [ "Passwords do not match" ]
                 end
+            redirect_to root_path
         end
-        redirect_to users_new_path
     end
 
     def new
