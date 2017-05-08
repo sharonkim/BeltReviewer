@@ -3,7 +3,6 @@
         <th>Name</th>
         <th>Date</th>
         <th>Location</th>
-        <th>Host</th>
         <th>Action/Status</th>
     </thead>
     <tbody>
@@ -14,30 +13,16 @@
                         <td><a href="/events/<%= event.current_user.state %>"><%= event.name %></a></td>
                         <td><%= event.date %></td>
                         <td><%= event.location %></td>
-                        <td><%= event.user.first_name %> <%= event.current_user.last_name %></td>
-                            <td>
-                                <a href="/events/<%= event.id %>/edit">Edit &emsp; </a>
-                                <a href="/events/<%= event.id %>/destroy" data-method="delete">Delete</a>
-                            <% if current_user.attending.exists?( event.id ) %>
-                                <p>Joining &emsp;
-                                <a href="/participants/<%= event.id %>/destroy" data-method="delete">Cancel</a>
-                            <% else %>
-                                <a href="/participants/<%= event.id %>/create" data-method="post">Join &emsp; </a>
-                            <% end %>
+                        <td>
+                            <a href="/events/<%= event.id %>/edit">Edit &emsp; </a>
+                            <a href="/events/<%= event.id %>/destroy" data-method="delete">Delete</a>
+                        <% if current_user.attending.exists?(event.id) %>
+                            <p>Joining &emsp;
+                            <a href="/participants/<%= event.id %>/destroy" data-method="delete">Cancel</a>
+                        <% else %>
+                            <a href="/participants/<%= event.id %>/create" data-method="post">Join &emsp; </a>
+                        <% end %>
                         </td>
-                            <% if @user.id == event.user_id %>
-                                <td>
-                                    <form action="/events/<%= event.id %>/join" method="post">
-                                        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-                                        <input type="hidden" name="event[user_id]" value="<%= user.id %>">
-                                        <a href="/events/<%= event.id %>/join %> data-method="post"">Join &emsp;</a>
-                                        <a href="/events/<%= event.id %>/edit">Edit &emsp14; </a>
-                                        <a href="/events<%= event.id %>"data-method="delete">Delete</a>
-                                    </form>
-                            <% elsif current_user.attending.exists?(event.id) %>
-                                <p>Joining</p>
-                                <a href="/participants/<%= event.id %>/destroy">Cancel</a>
-                            <% end %>
                     </tr>
                 <% end %>
             <% end %>
@@ -51,7 +36,6 @@
         <th>Date</th>
         <th>Location</th>
         <th>State</th>
-        <th>Host</th>
         <th>Action/Status</th>
     </thead>
     <tbody>
@@ -65,7 +49,6 @@
                         <td><%= event.date %></td>
                         <td><%= event.location %></td>
                         <td><%= event.state %></td>
-                        <td><%= event.user.first_name %></td>
                             <% if @user.id == event.user_id %>
                                 <td>
                                     <form action="/events/<%= event.id %>/join" method="post">

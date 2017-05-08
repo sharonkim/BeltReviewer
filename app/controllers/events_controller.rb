@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
     def index
         @events = Event.all
-        @local_events = Event.where(@user.state)
-        @other_events = Event.where.not(@user.state)
+        @local_events = Event.where( current_user.state )
+        @other_events = Event.where.not( current_user.state )
         @event = Event.new()
         @event = Event.new( session[ :event ] ) if flash[ :errors ] != nil && session[ :event ] != nil
     end
@@ -16,11 +16,14 @@ class EventsController < ApplicationController
     def create
         @event = Event.new( event_params )
 
-       unless @event.save
-            flash[:errors] = @event.errors.full_messages
-            session[ :event ] = @event
+       if @event
+           @event.save
+           redirect_to events_show_path
+       else
+           flash[:errors] = @event.errors.full_messages
+           session[ :event ] = @event
+           redirect_to events_index_path
         end
-            redirect_to events_index_path
     end
 
     def destroy

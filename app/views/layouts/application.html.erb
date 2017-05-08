@@ -18,12 +18,11 @@
 
       <% if current_user %>
           <form action="/sessions/<%= current_user.id %>" method="post">
-              <input type="hidden" name="_method" value="post">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
               <p>
-                  <a href="/events">Event Dashboard</a> &emsp14;
-                  <a href="/users/<%= current_user.id %>">Edit My Profile</a> &emsp14;
-                  <a href="/logout">Logout</a>
+                  <a href="/events/<%= @events %>/show">Event Dashboard</a> &emsp14;
+                  <a href="/users/<%= current_user.id %>/update" data-method="patch">Edit My Profile</a> &emsp14;
+                  <a href="/logout" data-method="delete">Logout</a>
               </p>
           </form>
       <% end %>

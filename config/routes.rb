@@ -3,21 +3,20 @@ Rails.application.routes.draw do
 
     get "sessions/index"
     post "sessions/create" => "sessions#create"
-    post "/login" => "sessions#create"
-    delete "/logout" => "sessions#destroy"
+    post "login" => "sessions#create"
+    delete "logout" => "sessions#destroy"
 
     get "users" => "users#index"
     post "users/create" => "users#create"
     get "users/new" => "users#new"
-    get "users/:id" => "users#show", as: "user_show"
-    patch "users/:id" => "users#update", as: "user_update"
+    patch "users/:id/update" => "users#update", as: "users_update"
     delete "users/:id" => "users#destroy"
 
-    get "events/index" => "events#index", as: "event_index"
+    get "events" => "events#index", as: "events_index"
     get "events/new" => "events#new"
     post "events/create" => "events#create"
-    get "events/:id" => "events#show", as: "event_show"
-    patch "events/:id" => "events#update"
+    get "events/:id/show" => "events#show", as: "events_show"
+    patch "events/:id/update" => "events#update"
     delete "events/:id" => "events#destroy"
 
     post "events/( :event_id )/participants/create" => "participants#create"

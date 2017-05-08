@@ -1,5 +1,5 @@
 <h3>Edit Your Profile</h3>
-<form action="/users/<%= current_user.id %>" method="post">
+<form action="/users/<%= current_user.id %>/update" method="post">
 	<input type="hidden" name="_method" value="patch">
 	<input type="hidden" name="authenticity_token" value="<%=  form_authenticity_token%>">
 	<p>
@@ -16,7 +16,7 @@
 	</p>
 	<p>
 		City: &ensp;
-		<input type="text" name="city" value="<%= user.city %>"> &ensp; 
+		<input type="text" name="city" value="<%= user.city %>"> &ensp;
 		<select name="state">
 			<% CS.states(:us).each do |state| %>
 				<option value="<%= state %>"><%= user.state %></option>

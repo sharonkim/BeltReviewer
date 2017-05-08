@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         if @user.valid? && ( @user.password == @user.password_confirmation )
             @user.save
             session[:user] = nil
-            redirect_to users_new_path
+            redirect_to events_index_path
         else
             flash[ :errors ] = @user.errors.full_messages
             session[ :user ] = @user
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
         else
             flash[ :errors ] = @user.errors.full_messages
             session[ :user ] = @user
-            redirect_to users_show_path
+            redirect_to users_update_path
         end
     end
 

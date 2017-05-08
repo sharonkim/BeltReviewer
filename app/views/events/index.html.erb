@@ -1,13 +1,13 @@
-<h2>Welcome, <%= @user.first_name %></h2>
+<h2>Welcome, <%= current_user.first_name %></h2>
 
 <div class="local_events">
 	<h3>Here are some of the events in your state:</h3>
-	<%= render partial: "/partials/_events.html.erb",  locals: { list: @local_events } %>
+	<%= render partial: "events",  locals: { list: @local_events } %>
 </div>
 
 <div class="other_events">
 	<h3>Here are some of the events in other states:</h3>
-	<%= render partial: "/partials/_events.html.erb", locals: { list: @other_events } %>
+	<%= render partial: "events", locals: { list: @other_events } %>
 </div>
 
 <div class="add_event">
@@ -17,13 +17,13 @@
 		<form action="/events/create" method="post">
 			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 			<p>Name:&emsp;
-				<input type="text" name="event[name]" placeholder="Event Name" required>
+				<input type="text" name="event[name]" placeholder="Event Name" value="<%= @event.name %>">
 			</p>
 			<p>Date:&emsp;
-				<input type="date" name="event[date]">
+				<input type="date" name="event[date]" value="<%= @event.date %>">
 			</p>
 			<p>Location:&emsp;
-				<input type="text" name="event[location]" placeholder="Location of event">&nbsp;
+				<input type="text" name="event[location]" placeholder="Location of event" value="<%= @event.location %>">&nbsp;
 				<select name="event[state]">
 					<% CS.states(:us).each do |s| %>
 						<option value="<%= s[0] %>"><%= s[0] %></option>
