@@ -1,25 +1,25 @@
 <h3>Edit Your Profile</h3>
-<form action="/users/<%= current_user.id %>" method="post">
+<form action="/users/<%= current_user.id %>/update" method="post">
 	<input type="hidden" name="_method" value="patch">
 	<input type="hidden" name="authenticity_token" value="<%=  form_authenticity_token%>">
 	<p>
 		First Name: &ensp;
-		<input type="text" name="first_name" value="<%= user.first_name %>">
+		<input type="text" name="first_name" value="<%= current_user.first_name %>">
 	</p>
 	<p>
 		Last Name: &ensp;
-		<input type="text" name="last_name" value="<%=  user.last_name %>">
+		<input type="text" name="last_name" value="<%=  current_user.last_name %>">
 	</p>
 	<p>
 		Email: &ensp;
-		<input type="text" name="email" value="<%= user.email %>">
+		<input type="text" name="email" value="<%= current_user.email %>">
 	</p>
 	<p>
-		City: &ensp;
-		<input type="text" name="city" value="<%= user.city %>"> &ensp; 
+		Location: &ensp;
+		<input type="text" name="location" value="<%= current_user.location %>"> &ensp;
 		<select name="state">
 			<% CS.states(:us).each do |state| %>
-				<option value="<%= state %>"><%= user.state %></option>
+				<option value="<%= state %>"><%= current_user.state %></option>
 			<% end %>
 		</select>
 	</p>

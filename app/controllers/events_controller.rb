@@ -14,30 +14,32 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = Event.new( event_params )
+        event = Event.new( event_params )
 
-       if @event
-           @event.save
+       if event
+           event.save
            redirect_to events_show_path
        else
-           flash[:errors] = @event.errors.full_messages
-           session[ :event ] = @event
+           flash[:errors] = event.errors.full_messages
+           session[ :event ] = event
            redirect_to events_index_path
         end
     end
 
     def destroy
-        @event = Event.find( params[ :id ] )
-        @event.destroy if current_user == @event.user
+        event = Event.find( params[ :id ] )
+        event.destroy if current_user == event.user
         redirect_to events_index_path
     end
 
     def update
-        @event = Event.find( params[ :id ] )
+        event = Event.find( params[ :id ] )
 
-        unless @event.update( event_params )
-            flash[:errors] = @event.errors.full_messages
-            session[ :event ] = @event
+        if event.update( event_params )
+			event.save
+		else
+            flash[:errors] = event.errors.full_messages
+            session[ :event ] = event
         end
             redirect_to events_show_path
     end

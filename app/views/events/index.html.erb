@@ -23,7 +23,7 @@
 				<input type="date" name="event[date]" value="<%= @event.date %>">
 			</p>
 			<p>Location:&emsp;
-				<input type="text" name="event[location]" placeholder="Location of event" value="<%= @event.location %>">&nbsp;
+				<input type="text" name="event[location]" placeholder="City" value="<%= @event.location %>">&nbsp;
 				<select name="event[state]">
 					<% CS.states(:us).each do |s| %>
 						<option value="<%= s[0] %>"><%= s[0] %></option>

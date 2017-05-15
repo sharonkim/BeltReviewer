@@ -1,19 +1,21 @@
 class ParticipantsController < ApplicationController
-    def create
-        @participant = Participant.new
-        @event = Event.find_by( :event_id )
-        @participant.event = @event
-        @participant.user = current_user
+	def create
+        participant = Participant.new
+        event = Event.find_by( :event_id )
+        participant.event = @event
+        participant.user = current_user
 
-        unless @participant
-            flash[ :errors ] = @participant.errors.full_messages
-            redirect_to events_index_path
+        if participant
+			participant.save
+		else
+            flash[ :errors ] = participant.errors.full_messages
         end
+		redirect_to events_index_path
     end
 
     def destroy
-        @event = Event.find_by( :event_id )
-        @participant = Participant.destroy.where(participant_params)
+        event = Event.find_by( :event_id )
+        participant = Participant.destroy.where(participant_params)
         redirect_to events_index_path
     end
 

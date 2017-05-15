@@ -1,8 +1,8 @@
 <div class="col-md-8">
 	<h2><%= @event.name %></h2>
-	<h4>Host: &emsp14; <%= @event.user.first_name %> <%= @event.user.last_name %></h4>
-	<h4>Date: &emsp14; <%= @event.date %></h4>
-	<h4>Location: &ensp; <%= @event.location %>, <%= @event.state %></h4>
+	<h4>Host:  <%= @event.user.first_name %> <%= @event.user.last_name %></h4>
+	<h4>Date:  <%= @event.date %></h4>
+	<h4>Location:  <%= @event.location %>, <%= @event.state %></h4>
 </div>
 
 <div class="participants">
@@ -15,8 +15,8 @@
 			<th>State</th>
 		</thead>
 		<tbody>
-			<% if @participant %>
-				<% @participant.each do |participant| %>
+			<% if participant %>
+				<% participant.each do |participant| %>
 					<tr>
 						<td><%= participant.first_name %> <%= participant.last_name %></td>
 						<td><%= participant.location %></td>
@@ -30,9 +30,9 @@
 
 <div class="discussion">
 	<h4>Discussion about this event:</h4>
-		<% if @comments %>
-			<% @comments.each do |comment| %>
-				<p><%= @comment.user.first_name %> says: <%= @comment.content %></p>
+		<% if comments %>
+			<% comments.each do |comment| %>
+				<p><%= comment.user.first_name %> says: <%= comment.content %></p>
 				<p>---------------------------</p>
 			<% end %>
 		<% end %>

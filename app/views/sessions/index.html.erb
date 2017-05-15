@@ -5,16 +5,16 @@
 	<form action="/users/create" method="post">
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		<p>First Name: &ensp;
-			<input type="text" name="user[first_name]" placeholder="First Name" value="<%= @user.first_name %>">
+			<input type="text" name="user[first_name]" value="<%= @user.first_name %>">
 		</p>
 		<p>Last Name: &ensp;
-			<input type="text" name="user[last_name]" placeholder="Last Name" value="<%= @user.last_name %>">
+			<input type="text" name="user[last_name]" value="<%= @user.last_name %>">
 		</p>
 		<p>Email: &ensp;
-			<input type="text" name="user[email]" placeholder="name@email.com" value="<%= @user.email %>">
+			<input type="text" name="user[email]" value="<%= @user.email %>">
 		</p>
 		<p>Location: &ensp;
-			<input type="text" name="user[location]" placeholder="Location Name" value="<%= @user.location %>">
+			<input type="text" name="user[location]" placeholder="City" value="<%= @user.location %>">
 			<select name="user[state]">
 				<% CS.states( :us ).each do |s| %>
 				<option value="<%= s[0] %>"><%= s[0] %></option>
@@ -39,11 +39,11 @@
 		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 		<p>
 			Email: &ensp;
-			<input type="text" name="email" placeholder="user@domain.com" value="<%= @user.email %>">
+			<input type="text" name="email" value="<%= @user.email %>">
 		</p>
 		<p>
 			Password: &ensp;
-			<input type="password" name="password" placeholder="Enter password">
+			<input type="password" name="password">
 		</p>
 		<input type="submit" value="Login">
 	</form>
