@@ -7,8 +7,7 @@ class UsersController < ApplicationController
     def create
         user = User.new( user_params )
 
-        if user.valid? && ( user.password == user.password_confirmation )
-            user.save
+        if user.save && ( user.password == user.password_confirmation )
             session[:user] = nil
             redirect_to events_index_path
         else
@@ -25,7 +24,7 @@ class UsersController < ApplicationController
     end
 
     def edit
-    end
+	end
 
     def update
         user = User.find( params[ :id ] )

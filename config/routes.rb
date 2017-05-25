@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     delete "participants/:id/destroy" => "participants#destroy"
 
 ### Comments ###
-    post "event/( :event_id )/comments/create" => "comments#create"
+    post "events/( :event_id )/comments/create" => "comments#create"
 
     # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
