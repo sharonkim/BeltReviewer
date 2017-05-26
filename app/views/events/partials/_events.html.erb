@@ -14,7 +14,7 @@
                         <td><a href="/events/<%= event.current_user.state %>"><%= event.name %></a></td>
                         <td><%= event.date %></td>
                         <td><%= event.location %></td>
-                        <td><%= event.user.first_name %> <%= event.current_user.last_name %></td>
+                        <td><%= event.current_user.first_name %> <%= event.current_user.last_name %></td>
                             <td>
                                 <a href="/events/<%= event.id %>/edit">Edit &emsp; </a>
                                 <a href="/events/<%= event.id %>/destroy" data-method="delete">Delete</a>

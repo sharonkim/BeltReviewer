@@ -10,7 +10,8 @@ class EventsController < ApplicationController
     def create
         event = Event.new( event_params )
 
-       if event.save
+       if event.user = current_user
+		   event.save
            redirect_to events_show_path, id: event.id
        else
            flash[:errors] = event.errors.full_messages
@@ -45,6 +46,6 @@ class EventsController < ApplicationController
 
     private
         def event_params
-            params.require( :event ).permit( :name, :date, :location, :state )
+            params.require( :event ).permit( :current_user, :name, :date, :location, :state )
         end
 end

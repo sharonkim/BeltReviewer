@@ -10,20 +10,20 @@ Rails.application.routes.draw do
 ### Users ###
     get "users" => "users#index"
     post "users/create" => "users#create"
-    get "users/:id/edit" => "users#edit", as: "users_edit"
-    patch "users/:id/update" => "users#update", as: "users_update"
-    delete "users/:id" => "users#destroy"
+    get "users/( :id )/edit" => "users#edit", as: "users_edit"
+    patch "users/( :id )/update" => "users#update", as: "users_update"
+    delete "users/( :id )" => "s#destroy"
 
 ### Events ###
     get "events" => "events#index", as: "events_index"
     post "events/create" => "events#create"
-    get "events/:id/show" => "events#show", as: "events_show"
-    patch "events/:id/update" => "events#update"
-    delete "events/:id" => "events#destroy"
+    get "events/( :id )/show" => "events#show", as: "events_show"
+    patch "events/( :id )/update" => "events#update"
+    delete "events/( :id )" => "events#destroy"
 
 ### Participants ###
     post "events/( :event_id )/participants/create" => "participants#create"
-    delete "participants/:id/destroy" => "participants#destroy"
+    delete "participants/( :id )/destroy" => "participants#destroy"
 
 ### Comments ###
     post "events/( :event_id )/comments/create" => "comments#create"
